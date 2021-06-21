@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MusicLibrary"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:model="using:MusicLibrary.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,15 +19,8 @@
                     RelativePanel.AlignLeftWithPanel="True"
                     Content="&#xE700;"
                     FontFamily="Segoe MDL2 Assets"
-                    Click="HamburgerButton_Click"
+                    Click="HamburgerButton_Click"   
                     />
-            <Button Name="BackButton" 
-                    RelativePanel.RightOf="HamburgerButton"
-                    Content="&#xE0A6;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Click="BackButton_Click"
-                    />
-
         </RelativePanel>
 
         <SplitView Grid.Row="1"
@@ -38,36 +32,85 @@
             <SplitView.Pane>
                 <ListView Name="MenuItemsListView"
                            IsItemClickEnabled="True"
-                           ItemClick="MenuItemsListView_ItemClick"
-            />
+                >
+                    <StackPanel>
+                        <Button Name="AllSongsHeader"
+                                   FontSize="30"
+                                   Height="60"
+                                   Width="180"
+                                   Content="All Songs"
+                                   Click="AllSongsHeader_Click" 
+                        />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name ="PlayListHeader"
+                                   FontSize="30"
+                                   Height="60"
+                                   Width="125"
+                                   Content="Playlists"
+                                   Click="PlayListHeader_Click"
+                        />
+                        <Button Name="AddPlayListButton"
+                                    RelativePanel.RightOf="PlayListHeader"
+                                    Content="&#xE109;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="AddPlayListButton_Click"
+                                    Height="60"
+                                    Width="60"
+                                    BorderBrush="Black" 
+                        />
+                        
+                    </StackPanel>
+                </ListView>
+
+
             </SplitView.Pane>
             <SplitView.Content>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Name="CategoryTextBlock"
-                               Text="All Sounds"
-                               FontSize="20" 
-                               Grid.Row="0" />
-                    <GridView Grid.Row="1"
-                              Name="SoundGridView"
-                              IsItemClickEnabled="True"
-                              ItemClick="SoundGridView_ItemClick"
-                              SelectionMode="None" >
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <Image Name="SoundImage"
-                                       Height="40"
-                                       Width="40" />
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
 
-                </Grid>
+                <ListView Name="AllSongsListView" 
+                          IsItemClickEnabled="True"
+                          ItemClick="AllSongsListView_ItemClick"
+                          ItemsSource="{x:Bind SongList}"
+                          >
+                    <MediaElement Name ="MyMediaElement" AutoPlay="True" />
+
+                    <ListView.ItemTemplate>
+                        
+                        <DataTemplate x:DataType="model:EachSongLine">
+                            <RelativePanel>
+                                <TextBlock Name="SongTrack"
+                                   Text="{x:Bind SongTitle}"
+                                   Width="800"
+                                   FontSize="20" 
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                />
+                               
+                                <Button Name ="PlayButton"
+                                    RelativePanel.RightOf="SongTrack"
+                                    Content="&#xE102;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="PlayButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"
+                                 />
+                                <Button Name ="AddButton"
+                                    RelativePanel.RightOf="PlayButton"
+                                    Content="&#xE109;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="AddButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"    
+                                />
+
+                            </RelativePanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
             </SplitView.Content>
-
         </SplitView>
 
     </Grid>

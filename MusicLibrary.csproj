@@ -122,7 +122,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\EachPlayList.cs" />
+    <Compile Include="Model\EachSongLine.cs" />
+    <Compile Include="Model\MenuItem.cs" />
     <Compile Include="Model\Song.cs" />
+    <Compile Include="Model\ViewManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +135,14 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Audio\Cat.wav" />
+    <Content Include="Assets\Audio\Clock.wav" />
+    <Content Include="Assets\Audio\Cow.wav" />
+    <Content Include="Assets\Audio\Gun.wav" />
+    <Content Include="Assets\Audio\LOL.wav" />
+    <Content Include="Assets\Audio\Ship.wav" />
+    <Content Include="Assets\Audio\Siren.wav" />
+    <Content Include="Assets\Audio\Spring.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -155,9 +167,7 @@
       <Version>6.2.12</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Taylor\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
