@@ -69,10 +69,26 @@ namespace MusicLibrary.Model
             {
                 new EachPlayList
                 {
-                    Name="Gargi",
+                    Name="Tisha"
+                    //SongTitles = {"First Song", "Second Song"}
+                },
+                new EachPlayList
+                {
+                    Name="Vasudha"
+                    //SongTitles = {"First Song", "Second Song"}
+                },
+                new EachPlayList
+                {
+                    Name="Gargi"
                     //SongTitles = {"First Song", "Second Song"}
                 }
+
             };
+
+            foreach (EachPlayList every in playListLines)
+            {
+                playList.Add(every);
+            }
 
             //SongLines.ForEach(each => songList.Add(each));
 

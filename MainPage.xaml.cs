@@ -55,8 +55,10 @@ namespace MusicLibrary
             
             MyMediaElement.Source = new Uri("C:/Users/gargi/source/repos/MusicLibrary/Assets/Audio/Cat.wav");
             MyMediaElement.Play();
-            
+
             //var song = e.OriginalSource.GetType();
+            //AllSongsListView.Visibility = Visibility.Collapsed;
+          
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -82,12 +84,16 @@ namespace MusicLibrary
 
         private void PlayListHeader_Click(object sender, RoutedEventArgs e)
         {
+            PlayListView.Visibility = Visibility.Visible;
+            AllSongsListView.Visibility = Visibility.Collapsed;
 
         }
 
         private void AllSongsHeader_Click(object sender, RoutedEventArgs e)
         {
-            
+            PlayListView.Visibility = Visibility.Collapsed;
+            AllSongsListView.Visibility = Visibility.Visible;
+
         }
 
     }

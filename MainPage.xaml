@@ -25,8 +25,8 @@
 
         <SplitView Grid.Row="1"
                    Name="leftSplitView"
-                   DisplayMode="CompactOverlay"
-                   CompactPaneLength="45"
+                   DisplayMode="CompactInline"
+                   CompactPaneLength="200"
                    OpenPaneLength="200"
                    >
             <SplitView.Pane>
@@ -63,10 +63,10 @@
                         
                     </StackPanel>
                 </ListView>
-
-
             </SplitView.Pane>
+            
             <SplitView.Content>
+                <StackPanel>
 
                 <ListView Name="AllSongsListView" 
                           IsItemClickEnabled="True"
@@ -109,7 +109,50 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                    <ListView Name="PlayListView" 
+                          IsItemClickEnabled="True"
+                          ItemClick="AllSongsListView_ItemClick"
+                          ItemsSource="{x:Bind playLists}"
+                          >
+                        <MediaElement Name ="MyMediaElement2" AutoPlay="True" />
 
+                        <ListView.ItemTemplate>
+
+                            <DataTemplate x:DataType="model:EachPlayList">
+                                <RelativePanel>
+                                    <TextBlock Name="SongTrack"
+                                   Text="{x:Bind Name}"
+                                   Width="800"
+                                   FontSize="20" 
+                                   RelativePanel.AlignLeftWithPanel="True"
+                                />
+
+                                    <Button Name ="PlayButton"
+                                    RelativePanel.RightOf="SongTrack"
+                                    Content="&#xE102;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="PlayButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"
+                                 />
+                                    <Button Name ="AddButton"
+                                    RelativePanel.RightOf="PlayButton"
+                                    Content="&#xE109;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="AddButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"    
+                                />
+
+                                </RelativePanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                 
+                </StackPanel>
             </SplitView.Content>
         </SplitView>
 
