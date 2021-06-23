@@ -37,6 +37,7 @@ namespace MusicLibrary
             AllSongsListView.Visibility = Visibility.Collapsed;
             PlayListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
+            AddSongsView.Visibility = Visibility.Collapsed;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -46,7 +47,7 @@ namespace MusicLibrary
 
         private void MenuItemsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+           
         }
 
         private void AllSongsListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -60,7 +61,7 @@ namespace MusicLibrary
             MyMediaElement.Play();
 
             //var song = e.OriginalSource.GetType();
-            //AllSongsListView.Visibility = Visibility.Collapsed;
+            AllSongsListView.Visibility = Visibility.Collapsed;
           
         }
 
@@ -90,7 +91,7 @@ namespace MusicLibrary
             PlayListView.Visibility = Visibility.Visible;
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
-
+            AddSongsView.Visibility = Visibility.Collapsed;
         }
 
         private void AllSongsHeader_Click(object sender, RoutedEventArgs e)
@@ -98,7 +99,7 @@ namespace MusicLibrary
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Visible;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
-
+            AddSongsView.Visibility = Visibility.Collapsed;
         }
 
         private void CreatePlayListButton_Click(object sender, RoutedEventArgs e)
@@ -106,6 +107,7 @@ namespace MusicLibrary
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Visible;
+            AddSongsView.Visibility = Visibility.Collapsed;
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -116,9 +118,46 @@ namespace MusicLibrary
                 Name = NewName
             };
             playLists.Add(NewPlayList);
+            PlayListView.Visibility = Visibility.Collapsed;
+            AllSongsListView.Visibility = Visibility.Collapsed;
+            CreateNewPlaylistView.Visibility = Visibility.Collapsed;
+            AddSongsView.Visibility = Visibility.Visible;
+
             //File.OpenWrite("/Assets/playlists.txt");
-            string FilePath =$"C:/Gargi/playlists.txt";
-            File.AppendAllText(FilePath,"NewName");
+            //string FilePath =$"C:/Gargi/playlists.txt";
+            //File.AppendAllText(FilePath,"NewName");
+        }
+
+        private void AddSongsButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void PlayListViewAddSongsButton_Click(object sender, RoutedEventArgs e)
+        {
+            //e;
+            //string thisObject = PlayListView.SelectedItem.ToString();
+            //PlayListView.SelectedItem.ToString;
+        }
+
+        private void PlayListViewPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AllSongsListViewPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddSongsViewPlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddSongsViewAddButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -93,17 +93,17 @@
                                    RelativePanel.AlignLeftWithPanel="True"
                                 />
                                
-                                <Button Name ="PlayButton"
+                                <Button Name ="AllSongsListViewPlayButton"
                                     RelativePanel.RightOf="SongTrack"
                                     Content="&#xE102;"
                                     FontFamily="Segoe MDL2 Assets"
-                                    Click="PlayButton_Click"
+                                    Click="AllSongsListViewPlayButton_Click"
                                     Height="50"
                                     Width="50"
                                     BorderBrush="Black"
                                  />
                                 <Button Name ="AddButton"
-                                    RelativePanel.RightOf="PlayButton"
+                                    RelativePanel.RightOf="AllSongsListViewPlayButton"
                                     Content="&#xE109;"
                                     FontFamily="Segoe MDL2 Assets"
                                     Click="AddButton_Click"
@@ -117,48 +117,48 @@
                     </ListView.ItemTemplate>
                 </ListView>
                     <ListView Name="PlayListView" 
-                          IsItemClickEnabled="True"
-                          ItemClick="AllSongsListView_ItemClick"
-                          ItemsSource="{x:Bind playLists}"
-                          >
+                              IsItemClickEnabled="False"
+                              ItemsSource="{x:Bind playLists}"
+                              >
                         <MediaElement Name ="MyMediaElement2" AutoPlay="True" />
 
                         <ListView.ItemTemplate>
 
                             <DataTemplate x:DataType="model:EachPlayList">
                                 <RelativePanel>
-                                    <TextBlock Name="SongTrack"
-                                   Text="{x:Bind Name}"
-                                   Width="800"
-                                   FontSize="20" 
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                />
+                                    <TextBlock Name="PlayListViewNameTextBlock"
+                                        Text="{x:Bind Name}"
+                                        Width="800"
+                                        FontSize="20" 
+                                        RelativePanel.AlignLeftWithPanel="True"
+                                    />
 
-                                    <Button Name ="PlayButton"
-                                    RelativePanel.RightOf="SongTrack"
-                                    Content="&#xE102;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Click="PlayButton_Click"
-                                    Height="50"
-                                    Width="50"
-                                    BorderBrush="Black"
-                                 />
-                                    <Button Name ="AddButton"
-                                    RelativePanel.RightOf="PlayButton"
-                                    Content="&#xE109;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Click="AddButton_Click"
-                                    Height="50"
-                                    Width="50"
-                                    BorderBrush="Black"    
-                                />
-
+                                    <Button Name ="PlayListViewPlayButton"
+                                        RelativePanel.RightOf="PlayListViewNameTextBlock"
+                                        Content="&#xE102;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Click="PlayListViewPlayButton_Click"
+                                        Height="50"
+                                        Width="50"
+                                        BorderBrush="Black"
+                                    />
+                                    
+                                    <Button Name ="PlayListViewAddSongsButton"
+                                        RelativePanel.RightOf="PlayListViewPlayButton"
+                                        Content="&#xE109;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        Click="PlayListViewAddSongsButton_Click"
+                                        Height="50"
+                                        Width="50"
+                                        BorderBrush="Black"    
+                                    />
                                 </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    
                     <ListView Name="CreateNewPlaylistView"
-                              IsItemClickEnabled="False"
+                              IsItemClickEnabled="True"
                               >
                         <StackPanel>
                             <TextBox Name="NewPlayListNameBox"
@@ -173,7 +173,53 @@
                         </StackPanel>
                         
                     </ListView>
-                 
+                    <ListView Name="AddSongsView" 
+                          IsItemClickEnabled="False"
+                          ItemsSource="{x:Bind SongList}"
+                          >
+                        <MediaElement Name ="MyMediaElement3" AutoPlay="True" />
+
+                        <ListView.ItemTemplate>
+
+                            <DataTemplate x:DataType="model:EachSongLine">
+                                <RelativePanel>
+                                    <CheckBox Name="SelectSongCheckBox"
+                                              Width="40"
+                                              Height="40"
+                                              IsChecked="False"
+                                              RelativePanel.AlignLeftWithPanel="True"
+                                    />
+
+                                    <TextBlock Name="AddSongsViewSongTextBlock"
+                                              Text="{x:Bind SongTitle}"
+                                              Width="800"
+                                              FontSize="20" 
+                                              RelativePanel.RightOf="SelectSongCheckBox"
+                                    />
+
+                                    <!--<Button Name ="AddSongsViewPlayButton"
+                                    RelativePanel.RightOf="AddSongsViewSongTextBlock"
+                                    Content="&#xE102;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="AddSongsViewPlayButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"
+                                 />-->
+                                    <Button Name ="AddSongsViewAddButton"
+                                    RelativePanel.RightOf="AddSongsViewSongTextBlock"
+                                    Content="&#xE109;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="AddSongsViewAddButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                    BorderBrush="Black"    
+                                />
+                                </RelativePanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
                 </StackPanel>
             </SplitView.Content>
         </SplitView>
