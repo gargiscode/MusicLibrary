@@ -34,6 +34,9 @@ namespace MusicLibrary
             playLists = new List<EachPlayList>();
 
             ViewManager.Initialize(SongList,playLists);
+            AllSongsListView.Visibility = Visibility.Collapsed;
+            PlayListView.Visibility = Visibility.Collapsed;
+            CreateNewPlaylistView.Visibility = Visibility.Collapsed;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
@@ -86,6 +89,7 @@ namespace MusicLibrary
         {
             PlayListView.Visibility = Visibility.Visible;
             AllSongsListView.Visibility = Visibility.Collapsed;
+            CreateNewPlaylistView.Visibility = Visibility.Collapsed;
 
         }
 
@@ -93,8 +97,28 @@ namespace MusicLibrary
         {
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Visible;
+            CreateNewPlaylistView.Visibility = Visibility.Collapsed;
 
         }
 
+        private void CreatePlayListButton_Click(object sender, RoutedEventArgs e)
+        {
+            PlayListView.Visibility = Visibility.Collapsed;
+            AllSongsListView.Visibility = Visibility.Collapsed;
+            CreateNewPlaylistView.Visibility = Visibility.Visible;
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            string NewName = NewPlayListNameBox.Text;
+            var NewPlayList = new EachPlayList
+            {
+                Name = NewName
+            };
+            playLists.Add(NewPlayList);
+            //File.OpenWrite("/Assets/playlists.txt");
+            string FilePath =$"C:/Gargi/playlists.txt";
+            File.AppendAllText(FilePath,"NewName");
+        }
     }
 }
