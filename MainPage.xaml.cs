@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MusicLibrary.Model;
 using System.Collections.ObjectModel;
+//using System.Text.RegularExpressions;
+using System.Text.Json;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -57,11 +59,11 @@ namespace MusicLibrary
             //string s2 = songLine.AudioFile;
             MyMediaElement.Source = new Uri(this.BaseUri, songLine.AudioFile);
             
-            MyMediaElement.Source = new Uri("C:/Users/gargi/source/repos/MusicLibrary/Assets/Audio/Cat.wav");
-            MyMediaElement.Play();
+            //MyMediaElement.Source = new Uri("C:/Users/gargi/source/repos/MusicLibrary/Assets/Audio/Cat.wav");
+            //MyMediaElement.Play();
 
             //var song = e.OriginalSource.GetType();
-            AllSongsListView.Visibility = Visibility.Collapsed;
+            //AllSongsListView.Visibility = Visibility.Collapsed;
           
         }
 
@@ -92,6 +94,33 @@ namespace MusicLibrary
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
             AddSongsView.Visibility = Visibility.Collapsed;
+            var playListLines = new List<EachPlayList>();
+            var localAppDataPath = Environment.SpecialFolder.LocalApplicationData;
+            string root = Environment.GetFolderPath(localAppDataPath);
+            string playListFileName = $@"{root}\MusicLibrary\playlists.txt";
+
+            if (File.Exists(playListFileName))
+            {
+                string ListOFNames = File.ReadAllText(playListFileName);
+                string[] PlayListNames = ListOFNames.Split(",");
+
+                foreach (string every in PlayListNames)
+                {
+                    var iterator = new EachPlayList
+                    {
+                        Name = every
+                    };
+                    playListLines.Add(iterator);
+                }
+            }
+            else
+            {
+                File.Create(playListFileName);
+            }
+
+            playListLines.ForEach(each => playLists.Add(each));
+
+
         }
 
         private void AllSongsHeader_Click(object sender, RoutedEventArgs e)
@@ -102,12 +131,19 @@ namespace MusicLibrary
             AddSongsView.Visibility = Visibility.Collapsed;
         }
 
-        private void CreatePlayListButton_Click(object sender, RoutedEventArgs e)
+        private void CreatePlayListHeader_Click(object sender, RoutedEventArgs e)
         {
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Visible;
             AddSongsView.Visibility = Visibility.Collapsed;
+
+            //var localAppDataPath = Environment.SpecialFolder.LocalApplicationData;
+            //string root = Environment.GetFolderPath(localAppDataPath);
+            //string playListFileName = $@"{root}\MusicLibrary\palylists.txt";
+
+            //string ListOFNames = File.ReadAllText(playListFileName);
+            //string[] PlayListNames = ListOFNames.Split(",");   
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -123,9 +159,49 @@ namespace MusicLibrary
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
             AddSongsView.Visibility = Visibility.Visible;
 
-            //File.OpenWrite("/Assets/playlists.txt");
-            //string FilePath =$"C:/Gargi/playlists.txt";
-            //File.AppendAllText(FilePath,"NewName");
+
+            //string PlayListFileLocation;
+            var localAppDataPath = Environment.SpecialFolder.LocalApplicationData;
+            string root = Environment.GetFolderPath(localAppDataPath);
+            string playListFileName = $@"{root}\MusicLibrary\playlists.txt";
+
+            //string PlayListFileLocation = $@"{playListFileName}\{NewName}.json";
+            File.AppendAllText(playListFileName,NewName);
+          
+            File.AppendAllText(playListFileName, ",");
+
+         /*   
+                        string text = JsonConvert.SerializeObject(songs); 
+
+                        System.IO.File.WriteAllText(PlayListFileLocation, text);
+
+                        if (Directory.Exists(playListDirectory))
+                        {
+                            PlayListFileLocation = $@"{playListDirectory}\{NewName}.json";
+                            if (File.Exists(PlayListFileLocation))
+                            {
+                                //read the file
+                                string fileText = System.IO.File.ReadAllText(PlayListFileLocation);
+
+                                //converting text into list of music using JSON
+                                playLists.Songs = JsonConvert.DeserializeObject<List<Music>>(fileText);
+                            }
+                            else //if file doesn't exist it creates a song object so that null reference exception doesn't happen
+                            {
+                                playLists.songs = new List<Music>();
+                            }
+                        }
+                        else
+                        {
+                            Directory.CreateDirectory(playListDirectory);
+                            this.songs = new List<Music>(); //creates a song object so that null reference exception doesn't happen
+                        }
+          */  
+            //string playListDirectory = $@"{root}\MusicLibrary\playlists.txt";
+
+            ////File.OpenWrite(playListDirectory);
+            //File.
+            //File.AppendAllText(playListDirectory, NewName);
         }
 
         private void AddSongsButton_Click(object sender, RoutedEventArgs e)
@@ -147,7 +223,10 @@ namespace MusicLibrary
 
         private void AllSongsListViewPlayButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //var songLine = (EachSongLine)e.ClickedItem;
+            
+            //var playButton = e.OriginalSource;
+            //MyMediaElement.Source = new Uri(this.BaseUri, this.AudioFile);
         }
 
         private void AddSongsViewPlayButton_Click(object sender, RoutedEventArgs e)

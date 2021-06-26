@@ -9,9 +9,6 @@ namespace MusicLibrary.Model
     public class EachPlayList
     {
         public string Name { get; set; }
-
-        //public List<string> SongTitles { get; set; }
-
         //public List<EachSongLine> Songs { get; set; }
 
         //public DateTime dateCreated { get; set; }

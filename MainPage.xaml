@@ -65,7 +65,7 @@
                                     Height="60"
                                     Width="200"
                                     Content="+ Create Playlist"
-                                    Click="CreatePlayListButton_Click"
+                                    Click="CreatePlayListHeader_Click"
                         />
 
                     </StackPanel>
@@ -74,18 +74,18 @@
             
             <SplitView.Content>
                 <StackPanel>
-
-                <ListView Name="AllSongsListView" 
+                    <MediaElement Name ="MyMediaElement" AutoPlay="True" />
+                    <ListView Name="AllSongsListView" 
                           IsItemClickEnabled="True"
                           ItemClick="AllSongsListView_ItemClick"
                           ItemsSource="{x:Bind SongList}"
                           >
-                    <MediaElement Name ="MyMediaElement" AutoPlay="True" />
+                    
 
                     <ListView.ItemTemplate>
                         
                         <DataTemplate x:DataType="model:EachSongLine">
-                            <RelativePanel>
+                            <RelativePanel Name="relativepanel1">
                                 <TextBlock Name="SongTrack"
                                    Text="{x:Bind SongTitle}"
                                    Width="800"
