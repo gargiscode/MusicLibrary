@@ -53,13 +53,6 @@
                         />
                     </StackPanel>
                     <StackPanel>
-                        <!--<Button Name="AddPlayListButton"
-                                    RelativePanel.LeftOf="PlayListHeader"
-                                    Content="&#xE109;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Height="60"
-                                    Width="60"
-                        />-->
                         <Button Name="CreatePlayListButton"
                                     FontSize="20"
                                     Height="60"
@@ -80,10 +73,8 @@
                           ItemClick="AllSongsListView_ItemClick"
                           ItemsSource="{x:Bind SongList}"
                           >
-                    
 
-                    <ListView.ItemTemplate>
-                        
+                        <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:EachSongLine">
                             <RelativePanel Name="relativepanel1">
                                 <TextBlock Name="SongTrack"
@@ -117,41 +108,21 @@
                     </ListView.ItemTemplate>
                 </ListView>
                     <ListView Name="PlayListView" 
-                              IsItemClickEnabled="False"
+                              IsItemClickEnabled="True"
                               ItemsSource="{x:Bind playLists}"
+                              ItemClick="PlayListView_ItemClick"
                               >
-                        <MediaElement Name ="MyMediaElement2" AutoPlay="True" />
-
                         <ListView.ItemTemplate>
 
                             <DataTemplate x:DataType="model:EachPlayList">
                                 <RelativePanel>
                                     <TextBlock Name="PlayListViewNameTextBlock"
-                                        Text="{x:Bind Name}"
+                                        Text="{Binding Mode=TwoWay, Path=Name}"
                                         Width="800"
                                         FontSize="20" 
                                         RelativePanel.AlignLeftWithPanel="True"
                                     />
 
-                                    <Button Name ="PlayListViewPlayButton"
-                                        RelativePanel.RightOf="PlayListViewNameTextBlock"
-                                        Content="&#xE102;"
-                                        FontFamily="Segoe MDL2 Assets"
-                                        Click="PlayListViewPlayButton_Click"
-                                        Height="50"
-                                        Width="50"
-                                        BorderBrush="Black"
-                                    />
-                                    
-                                    <Button Name ="PlayListViewAddSongsButton"
-                                        RelativePanel.RightOf="PlayListViewPlayButton"
-                                        Content="&#xE109;"
-                                        FontFamily="Segoe MDL2 Assets"
-                                        Click="PlayListViewAddSongsButton_Click"
-                                        Height="50"
-                                        Width="50"
-                                        BorderBrush="Black"    
-                                    />
                                 </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
@@ -175,7 +146,7 @@
                     </ListView>
                     <ListView Name="AddSongsView" 
                           IsItemClickEnabled="False"
-                          ItemsSource="{x:Bind SongList}"
+                          ItemsSource="{x:Bind SelectedSongs}"
                           >
                         <MediaElement Name ="MyMediaElement3" AutoPlay="True" />
 
@@ -186,7 +157,8 @@
                                     <CheckBox Name="SelectSongCheckBox"
                                               Width="40"
                                               Height="40"
-                                              IsChecked="False"
+                                              IsChecked="{Binding Mode=TwoWay, Path=IsSelected}"
+                                              Checked="SelectSongCheckBox_Checked"
                                               RelativePanel.AlignLeftWithPanel="True"
                                     />
 
@@ -197,28 +169,64 @@
                                               RelativePanel.RightOf="SelectSongCheckBox"
                                     />
 
-                                    <!--<Button Name ="AddSongsViewPlayButton"
-                                    RelativePanel.RightOf="AddSongsViewSongTextBlock"
-                                    Content="&#xE102;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Click="AddSongsViewPlayButton_Click"
-                                    Height="50"
-                                    Width="50"
-                                    BorderBrush="Black"
-                                 />-->
-                                    <Button Name ="AddSongsViewAddButton"
-                                    RelativePanel.RightOf="AddSongsViewSongTextBlock"
-                                    Content="&#xE109;"
-                                    FontFamily="Segoe MDL2 Assets"
-                                    Click="AddSongsViewAddButton_Click"
-                                    Height="50"
-                                    Width="50"
-                                    BorderBrush="Black"    
+
+                                </RelativePanel>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <Button Name ="AddSongsViewAddButton"
+                                            Content="Add Songs"
+                                            Click="AddSongsViewAddButton_Click"
+                                            HorizontalAlignment="Center"
+                                    />
+                        </ListView.Footer>
+                    </ListView>
+                    <ListView Name="ThisPlayListView" 
+                          IsItemClickEnabled="False"
+                          ItemClick="ThisPlayListView_ItemClick"
+                          ItemsSource="{x:Bind currentPlaylist.Songs}"
+                          >
+                        <ListView.Header>
+                            <TextBlock Name="PlayListName"
+                                       Text="PlayList Name"
+                                       FontSize="40"
+ 
+                            />
+                        </ListView.Header>
+
+                        <ListView.ItemTemplate>
+
+                            <DataTemplate x:DataType="model:EachSongLine">
+                                <RelativePanel>
+                                    <TextBlock Name="PlayListSongName"
+                                   Text="{Binding Mode=TwoWay, Path=SongTitle}"
+                                   Width="800"
+                                   FontSize="20" 
+                                   RelativePanel.AlignLeftWithPanel="True"
                                 />
                                 </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <RelativePanel>
+                                <Button Name="PlayPlayListButton"
+                                    Click="PlayPlayListButton_Click"
+                                    Content="Play All"
+                                    Width="80"
+                                    Height="40"
+                                    />
+                                <Button Name="AddSongsToPlayListButton"
+                                    RelativePanel.RightOf="PlayPlayListButton"
+                                    Click="AddSongsToPlayListButton_Click"
+                                    Content="Add Songs"
+                                    Width="80"
+                                    Height="40"
+                                    />
+                            </RelativePanel>
+                        </ListView.Footer>
                     </ListView>
+
 
                 </StackPanel>
             </SplitView.Content>

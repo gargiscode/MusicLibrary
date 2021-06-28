@@ -11,52 +11,63 @@ namespace MusicLibrary.Model
     public static class ViewManager
     {
         //Scope to Optimize later
-        public static void Initialize(List<EachSongLine> songList, List<EachPlayList> playList)
+        public static void Initialize(List<EachSongLine> songList, List<EachPlayList> playList, List<EachSongLine> selectionList)
         {
             //Initialize SongLines
             songList.Clear();
             playList.Clear();
+            selectionList.Clear();
 
             var SongLines = new List<EachSongLine>
             {
                 new EachSongLine
                 {
                     SongTitle = "First Song",
-                    AudioFile = "/Assets/Audio/Cat.wav"
+                    AudioFile = "/Assets/Audio/Cat.wav",
+                    IsSelected = false
                 },
                 new EachSongLine
                 {
                     SongTitle = "Second Song",
-                    AudioFile = "/Assets/Audio/Clock.wav"
+                    AudioFile = "/Assets/Audio/Clock.wav",
+                    IsSelected = false
+
                 },
                 new EachSongLine
                 {
                     SongTitle = "Third Song",
-                    AudioFile = "/Assets/Audio/Cow.wav"
+                    AudioFile = "/Assets/Audio/Cow.wav",
+                    IsSelected = false
                 },
                 new EachSongLine
                 {
                     SongTitle = "Fourth Song",
-                    AudioFile = "/Assets/Audio/Gun.wav"
+                    AudioFile = "/Assets/Audio/Gun.wav",
+                    IsSelected = false
                 },
                 new EachSongLine
                 {
                     SongTitle = "Fifth Song",
-                    AudioFile = "/Assets/Audio/LOL.wav"
+                    AudioFile = "/Assets/Audio/LOL.wav",
+                    IsSelected = false
                 },
                 new EachSongLine
                 {
                     SongTitle = "Sixth Song",
-                    AudioFile = "/Assets/Audio/Ship.wav"
-                },                new EachSongLine
+                    AudioFile = "/Assets/Audio/Ship.wav",
+                    IsSelected = false
+                },                
+                new EachSongLine
                 {
                     SongTitle = "Seventh Song",
-                    AudioFile = "/Assets/Audio/Siren.wav"
+                    AudioFile = "/Assets/Audio/Siren.wav",
+                    IsSelected = false
                 },
                  new EachSongLine
                 {
                     SongTitle = "Eighth Song",
-                    AudioFile = "/Assets/Audio/Spring.wav"
+                    AudioFile = "/Assets/Audio/Spring.wav",
+                    IsSelected = false
                 }
             };
 
@@ -65,6 +76,7 @@ namespace MusicLibrary.Model
             foreach(EachSongLine each in SongLines)
             {
                 songList.Add(each);
+                selectionList.Add(each);
             }
 
             /*

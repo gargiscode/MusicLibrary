@@ -19,6 +19,7 @@ namespace MusicLibrary.Model
     {
         public string SongTitle { get; set; }
         public string AudioFile { get; set; }
+        public bool IsSelected { get; set; }
        
     }
 }
