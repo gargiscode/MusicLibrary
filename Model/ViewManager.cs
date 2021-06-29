@@ -11,7 +11,7 @@ namespace MusicLibrary.Model
     public static class ViewManager
     {
         //Scope to Optimize later
-        public static void Initialize(List<EachSongLine> songList, List<EachPlayList> playList, List<EachSongLine> selectionList)
+        public static void Initialize(List<EachSongLine> songList, ObservableCollection<EachPlayList> playList, List<EachSongLine> selectionList)
         {
             //Initialize SongLines
             songList.Clear();

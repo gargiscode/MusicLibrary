@@ -60,6 +60,7 @@
                                     Content="+ Create Playlist"
                                     Click="CreatePlayListHeader_Click"
                         />
+                        
 
                     </StackPanel>
                 </ListView>
@@ -117,7 +118,7 @@
                             <DataTemplate x:DataType="model:EachPlayList">
                                 <RelativePanel>
                                     <TextBlock Name="PlayListViewNameTextBlock"
-                                        Text="{Binding Mode=TwoWay, Path=Name}"
+                                        Text="{x:Bind Name}"
                                         Width="800"
                                         FontSize="20" 
                                         RelativePanel.AlignLeftWithPanel="True"
@@ -182,29 +183,55 @@
                                     />
                         </ListView.Footer>
                     </ListView>
+                    <!--<ListView Name="ThisPlayListView"
+                              ItemsSource="{x:Bind currentPlaylist}"
+                          IsItemClickEnabled="False"
+                          ItemClick="ThisPlayListView_ItemClick"
+                              
+                              >
+                       
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EachPlayList">
+                        
+                            <TextBlock Name="abc"
+                                       Text="{x:Bind Name}"
+                                       FontSize="40"
+                            />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>-->
+                        <!--<ListView Name="bcd"
+                                  ItemsSource="{x:Bind currentPlaylist.Songs}"
+                                  >
+                            <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EachSongLine">
+                                    <RelativePanel>
+                                        <TextBlock Name="cde"
+                                                    Text="{x:Bind SongTitle}"
+                                                    Width="800"
+                                                    FontSize="20" 
+                                                    RelativePanel.AlignLeftWithPanel="True"
+                                />
+                                    </RelativePanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>-->
+
                     <ListView Name="ThisPlayListView" 
                           IsItemClickEnabled="False"
                           ItemClick="ThisPlayListView_ItemClick"
                           ItemsSource="{x:Bind currentPlaylist.Songs}"
                           >
-                        <ListView.Header>
-                            <TextBlock Name="PlayListName"
-                                       Text="PlayList Name"
-                                       FontSize="40"
- 
-                            />
-                        </ListView.Header>
-
-                        <ListView.ItemTemplate>
+                           <ListView.ItemTemplate>
 
                             <DataTemplate x:DataType="model:EachSongLine">
                                 <RelativePanel>
                                     <TextBlock Name="PlayListSongName"
-                                   Text="{Binding Mode=TwoWay, Path=SongTitle}"
-                                   Width="800"
-                                   FontSize="20" 
-                                   RelativePanel.AlignLeftWithPanel="True"
-                                />
+                                               Text="{x:Bind SongTitle}"
+                                               Width="800"
+                                               FontSize="20" 
+                                               RelativePanel.AlignLeftWithPanel="True"
+                                    />
+                                    
                                 </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

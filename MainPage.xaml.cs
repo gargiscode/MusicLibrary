@@ -29,25 +29,24 @@ namespace MusicLibrary
     public sealed partial class MainPage : Page
     {
         private List<EachSongLine> SongList;
-        private List<EachPlayList> playLists;
+        private ObservableCollection<EachPlayList> playLists;
         private List<EachSongLine> SelectedSongs;
         private EachPlayList currentPlaylist;
-        private List<EachSongLine> currentSongsList;
+        private ObservableCollection<EachSongLine> currentSongsList;
 
         public MainPage()
         {
             this.InitializeComponent();
             SongList = new List<EachSongLine>();
-            playLists = new List<EachPlayList>();
+            playLists = new ObservableCollection<EachPlayList>();
             SelectedSongs = new List<EachSongLine>();
             currentPlaylist = new EachPlayList();
-            currentSongsList = new List<EachSongLine>();
+            currentSongsList = new ObservableCollection<EachSongLine>();
 
             ViewManager.Initialize(SongList,playLists, SelectedSongs);
 
-            currentPlaylist.Songs = new List<EachSongLine>();
-
-            currentSongsList = new List<EachSongLine>();
+            currentPlaylist.Songs = new ObservableCollection<EachSongLine>();
+            currentPlaylist.Songs.Clear();
 
             AllSongsListView.Visibility = Visibility.Collapsed;
             PlayListView.Visibility = Visibility.Collapsed;
@@ -107,8 +106,9 @@ namespace MusicLibrary
                 playListLines.Add(eachList);
             }
 
+            playLists.Clear();
             playListLines.ForEach(each => playLists.Add(each));
-
+            currentPlaylist.Songs.Clear();
 
         }
 
@@ -137,6 +137,7 @@ namespace MusicLibrary
             string NewName = NewPlayListNameBox.Text;
             currentPlaylist.Name = NewName;
             playLists.Add(currentPlaylist);
+            currentPlaylist.Songs.Clear();
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
@@ -172,7 +173,7 @@ namespace MusicLibrary
         private void AddSongsViewAddButton_Click(object sender, RoutedEventArgs e)
         {
 
-            currentPlaylist.Songs = new List<EachSongLine>();
+            currentPlaylist.Songs = new ObservableCollection<EachSongLine>();
 
             foreach (var every in SelectedSongs)
             {
@@ -199,6 +200,7 @@ namespace MusicLibrary
             string root = Environment.GetFolderPath(localAppDataPath);
             string playListFileName = $@"{root}\MusicLibrary\playlists.txt";
             string writeToFile = JsonConvert.SerializeObject(currentPlaylist);
+            currentPlaylist.Songs.Clear();
 
             System.IO.File.AppendAllText(playListFileName, writeToFile);
             System.IO.File.AppendAllText(playListFileName, "\n");
@@ -232,7 +234,10 @@ namespace MusicLibrary
 
         private void PlayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            ListView lv = sender as ListView;
+            //lv.Header.
             currentPlaylist.Songs.Clear();
+            currentSongsList.Clear();
             currentPlaylist.Name = ((EachPlayList)e.ClickedItem).Name;
 
             foreach (var each in ((EachPlayList)e.ClickedItem).Songs)
@@ -247,7 +252,7 @@ namespace MusicLibrary
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
             AddSongsView.Visibility = Visibility.Collapsed;
             ThisPlayListView.Visibility = Visibility.Visible;
-
+            
 
         }
     }
