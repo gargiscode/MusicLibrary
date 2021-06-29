@@ -11,7 +11,12 @@ namespace MusicLibrary.Model
     {
         public string Name { get; set; }
         public ObservableCollection<EachSongLine> Songs { get; set; }
+        //public DateTime DateCreated { get; set; }
 
-        //public DateTime dateCreated { get; set; }
+        public string ImageFile {get; set; }
+
+        public string Description { get; set; }
+
+
     }
 }

@@ -33,6 +33,8 @@ namespace MusicLibrary
         private List<EachSongLine> SelectedSongs;
         private EachPlayList currentPlaylist;
         private ObservableCollection<EachSongLine> currentSongsList;
+        private ObservableCollection<EachPlayList> thisPlayList;
+
 
         public MainPage()
         {
@@ -42,11 +44,15 @@ namespace MusicLibrary
             SelectedSongs = new List<EachSongLine>();
             currentPlaylist = new EachPlayList();
             currentSongsList = new ObservableCollection<EachSongLine>();
+            thisPlayList = new ObservableCollection<EachPlayList>();
+            //thisPlayList = new ObservableCollection<EachSongLine>();
 
             ViewManager.Initialize(SongList,playLists, SelectedSongs);
 
             currentPlaylist.Songs = new ObservableCollection<EachSongLine>();
             currentPlaylist.Songs.Clear();
+            //thisPlayList[0].Songs.Clear();
+            thisPlayList.Clear();
 
             AllSongsListView.Visibility = Visibility.Collapsed;
             PlayListView.Visibility = Visibility.Collapsed;
@@ -234,24 +240,34 @@ namespace MusicLibrary
 
         private void PlayListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ListView lv = sender as ListView;
-            //lv.Header.
+            //thisPlayList[0].Songs.Clear();
+            thisPlayList.Clear();
+
             currentPlaylist.Songs.Clear();
-            currentSongsList.Clear();
+            //currentSongsList.Clear();
             currentPlaylist.Name = ((EachPlayList)e.ClickedItem).Name;
 
             foreach (var each in ((EachPlayList)e.ClickedItem).Songs)
             {
                 currentPlaylist.Songs.Add(each);
-                currentSongsList.Add(each);
+                //currentSongsList.Add(each);
             }
 
+            thisPlayList.Add((EachPlayList)e.ClickedItem);
+            /*
+            foreach (var each in ((EachPlayList)e.ClickedItem).Songs)
+            {
+                thisPlayList[0].Songs.Add(each);
+            }
+            */
+          
 
             PlayListView.Visibility = Visibility.Collapsed;
             AllSongsListView.Visibility = Visibility.Collapsed;
             CreateNewPlaylistView.Visibility = Visibility.Collapsed;
             AddSongsView.Visibility = Visibility.Collapsed;
             ThisPlayListView.Visibility = Visibility.Visible;
+            SongsInThisPlayListView.Visibility = Visibility.Visible;
             
 
         }

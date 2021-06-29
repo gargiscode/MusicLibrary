@@ -132,17 +132,63 @@
                     <ListView Name="CreateNewPlaylistView"
                               IsItemClickEnabled="True"
                               >
-                        <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Name="PlayListNameLabel"
+                                       FontSize="20"
+                                       Text="Name"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       />
                             <TextBox Name="NewPlayListNameBox"
                                      Width="200"
                                      Height="50"
+                                     Grid.Row="0"
+                                     Grid.Column="1"
                             />
+                            <TextBlock Name="PlayListDescriptionLabel"
+                                       FontSize="20"
+                                       Text="Description"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       />
+                            <TextBox Name="PlayListDescriptionBox"
+                                     Width="200"
+                                     Height="50"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                            />
+                            <TextBlock Name="PlayListImageLabel"
+                                       FontSize="20"
+                                       Text="Image"
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       />
+                            <ComboBox Name="PlayListImageComboBox"
+                                      Text="Images"
+                                      Width="200"
+                                      Height="50"
+                                      Grid.Row="2"
+                                      Grid.Column="1"
+                             />
                             <Button Name ="CreateButton"
                                     Content="Create"
+                                    FontSize="20"
                                     Click="CreateButton_Click" 
-                                    HorizontalAlignment="Center"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
                             />
-                        </StackPanel>
+                        </Grid>
                         
                     </ListView>
                     <ListView Name="AddSongsView" 
@@ -183,58 +229,40 @@
                                     />
                         </ListView.Footer>
                     </ListView>
-                    <!--<ListView Name="ThisPlayListView"
-                              ItemsSource="{x:Bind currentPlaylist}"
-                          IsItemClickEnabled="False"
-                          ItemClick="ThisPlayListView_ItemClick"
-                              
-                              >
-                       
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:EachPlayList">
-                        
-                            <TextBlock Name="abc"
-                                       Text="{x:Bind Name}"
-                                       FontSize="40"
-                            />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>-->
-                        <!--<ListView Name="bcd"
-                                  ItemsSource="{x:Bind currentPlaylist.Songs}"
-                                  >
-                            <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:EachSongLine">
-                                    <RelativePanel>
-                                        <TextBlock Name="cde"
-                                                    Text="{x:Bind SongTitle}"
-                                                    Width="800"
-                                                    FontSize="20" 
-                                                    RelativePanel.AlignLeftWithPanel="True"
-                                />
-                                    </RelativePanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>-->
 
                     <ListView Name="ThisPlayListView" 
                           IsItemClickEnabled="False"
                           ItemClick="ThisPlayListView_ItemClick"
-                          ItemsSource="{x:Bind currentPlaylist.Songs}"
+                          ItemsSource="{x:Bind thisPlayList}"
                           >
-                           <ListView.ItemTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:EachPlayList">
+                                <TextBlock Name="SongTitleTextBox"
+                                        Text="{x:Bind Name}"
+                                        Width="800"
+                                        FontSize="30"
+                                        />
 
-                            <DataTemplate x:DataType="model:EachSongLine">
-                                <RelativePanel>
-                                    <TextBlock Name="PlayListSongName"
-                                               Text="{x:Bind SongTitle}"
-                                               Width="800"
-                                               FontSize="20" 
-                                               RelativePanel.AlignLeftWithPanel="True"
-                                    />
-                                    
-                                </RelativePanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                    </ListView>
+
+                    <ListView Name="SongsInThisPlayListView"
+                                 ItemsSource="{x:Bind currentPlaylist.Songs}"
+                                 >
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="model:EachSongLine">
+                                    <StackPanel>
+                                        <TextBlock Name="SongTitleTextBox"
+                                                   Text="{x:Bind SongTitle}"
+                                                   Width="800"
+                                                   FontSize="20"
+                                                   />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        
+
                         <ListView.Footer>
                             <RelativePanel>
                                 <Button Name="PlayPlayListButton"
