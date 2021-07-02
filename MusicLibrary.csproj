@@ -122,10 +122,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\CoverImage.cs" />
     <Compile Include="Model\EachPlayList.cs" />
     <Compile Include="Model\EachSongLine.cs" />
-    <Compile Include="Model\MenuItem.cs" />
-    <Compile Include="Model\Song.cs" />
     <Compile Include="Model\ViewManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,14 +134,29 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Audio\Cat.wav" />
-    <Content Include="Assets\Audio\Clock.wav" />
-    <Content Include="Assets\Audio\Cow.wav" />
-    <Content Include="Assets\Audio\Gun.wav" />
-    <Content Include="Assets\Audio\LOL.wav" />
-    <Content Include="Assets\Audio\Ship.wav" />
-    <Content Include="Assets\Audio\Siren.wav" />
-    <Content Include="Assets\Audio\Spring.wav" />
+    <Content Include="Assets\Audio\bhool_ja.mp3" />
+    <Content Include="Assets\Audio\brown_rang.mp3" />
+    <Content Include="Assets\Audio\dheere_dheere.mp3" />
+    <Content Include="Assets\Audio\gur_nalon.mp3" />
+    <Content Include="Assets\Audio\main_yahan.mp3" />
+    <Content Include="Assets\Audio\mast_kalander.mp3" />
+    <Content Include="Assets\Audio\musu_musu.mp3" />
+    <Content Include="Assets\Audio\sunny_sunny.mp3" />
+    <Content Include="Assets\Audio\to_brazil.mp3" />
+    <Content Include="Assets\Audio\we_are.mp3" />
+    <Content Include="Assets\Audio\we_like.mp3" />
+    <Content Include="Assets\Audio\woh_pehli_baar.mp3" />
+    <Content Include="Assets\Images\bhangra.png" />
+    <Content Include="Assets\Images\bollywood.png" />
+    <Content Include="Assets\Images\dandiya.png" />
+    <Content Include="Assets\Images\happy.png" />
+    <Content Include="Assets\Images\international.png" />
+    <Content Include="Assets\Images\kishore.png" />
+    <Content Include="Assets\Images\lata.png" />
+    <Content Include="Assets\Images\party.png" />
+    <Content Include="Assets\Images\romantic.png" />
+    <Content Include="Assets\Images\tranquil.png" />
+    <Content Include="Assets\Images\workout.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

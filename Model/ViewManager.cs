@@ -10,68 +10,90 @@ namespace MusicLibrary.Model
 {
     public static class ViewManager
     {
-        //Scope to Optimize later
-        public static void Initialize(List<EachSongLine> songList, ObservableCollection<EachPlayList> playList, List<EachSongLine> selectionList)
+        //Loads all the songs, images in collection
+        public static void Initialize(List<EachSongLine> songList, ObservableCollection<EachSongLine> selectionList, List<CoverImage> ImageList)
         {
             //Initialize SongLines
             songList.Clear();
-            playList.Clear();
             selectionList.Clear();
 
             var SongLines = new List<EachSongLine>
             {
                 new EachSongLine
                 {
-                    SongTitle = "First Song",
-                    AudioFile = "/Assets/Audio/Cat.wav",
+                    SongTitle = "We like to party",
+                    AudioFile = "/Assets/Audio/we_like.mp3",
                     IsSelected = false
                 },
                 new EachSongLine
                 {
-                    SongTitle = "Second Song",
-                    AudioFile = "/Assets/Audio/Clock.wav",
+                    SongTitle = "Sunny Sunny",
+                    AudioFile = "/Assets/Audio/sunny_sunny.mp3",
                     IsSelected = false
 
                 },
                 new EachSongLine
                 {
-                    SongTitle = "Third Song",
-                    AudioFile = "/Assets/Audio/Cow.wav",
+                    SongTitle = "Dheere Dheere se",
+                    AudioFile = "/Assets/Audio/dheere_dheere.mp3",
                     IsSelected = false
                 },
                 new EachSongLine
                 {
-                    SongTitle = "Fourth Song",
-                    AudioFile = "/Assets/Audio/Gun.wav",
+                    SongTitle = "To Brazil",
+                    AudioFile = "/Assets/Audio/to_brazil.mp3",
                     IsSelected = false
                 },
                 new EachSongLine
                 {
-                    SongTitle = "Fifth Song",
-                    AudioFile = "/Assets/Audio/LOL.wav",
+                    SongTitle = "Woh pehli baar",
+                    AudioFile = "/Assets/Audio/woh_pehli_baar.mp3",
                     IsSelected = false
                 },
                 new EachSongLine
                 {
-                    SongTitle = "Sixth Song",
-                    AudioFile = "/Assets/Audio/Ship.wav",
+                    SongTitle = "Gur naalon ishq meetha",
+                    AudioFile = "/Assets/Audio/gur_nalon.mp3",
                     IsSelected = false
                 },                
                 new EachSongLine
                 {
-                    SongTitle = "Seventh Song",
-                    AudioFile = "/Assets/Audio/Siren.wav",
+                    SongTitle = "Dama dam mast kalander",
+                    AudioFile = "/Assets/Audio/mast_kalander.mp3",
                     IsSelected = false
                 },
                  new EachSongLine
                 {
-                    SongTitle = "Eighth Song",
-                    AudioFile = "/Assets/Audio/Spring.wav",
+                    SongTitle = "Musu musu haasi diyo",
+                    AudioFile = "/Assets/Audio/musu_musu.mp3",
+                    IsSelected = false
+                },
+                 new EachSongLine
+                {
+                    SongTitle = "Kudiye ni tere brown rang de",
+                    AudioFile = "/Assets/Audio/brown_rang.mp3",
+                    IsSelected = false
+                },
+                 new EachSongLine
+                {
+                    SongTitle = "Jaanam dekhlo mit gayi dooriyan",
+                    AudioFile = "/Assets/Audio/main_yahan.mp3",
+                    IsSelected = false
+                },
+                 new EachSongLine
+                {
+                    SongTitle = "Bhool ja hai kasam tujhe muskura",
+                    AudioFile = "/Assets/Audio/bhool_ja.mp3",
+                    IsSelected = false
+                },
+                 new EachSongLine
+                {
+                    SongTitle = "We are going to Ibitza",
+                    AudioFile = "/Assets/Audio/we_are.mp3",
                     IsSelected = false
                 }
             };
 
-            int i = SongLines.Count;
 
             foreach(EachSongLine each in SongLines)
             {
@@ -79,55 +101,64 @@ namespace MusicLibrary.Model
                 selectionList.Add(each);
             }
 
-            /*
-            var playListLines = new List<EachPlayList>();
-            var localAppDataPath = Environment.SpecialFolder.LocalApplicationData;
-            string root = Environment.GetFolderPath(localAppDataPath);
-            string playListFileName = $@"{root}\MusicLibrary\playlists.txt";
-
-            if (File.Exists(playListFileName))
+            ImageList.Clear();
+            var Images = new List<CoverImage>
             {
-                string ListOFNames = File.ReadAllText(playListFileName);
-                string[] PlayListNames = ListOFNames.Split(",");
-
-                foreach (string every in PlayListNames)
+                new CoverImage
                 {
-                    var iterator = new EachPlayList
-                    {
-                        Name = every
-                    };
-                    playListLines.Add(iterator);
+                    Name="celebration",
+                    ImageFile="/Assets/Images/bhangra.png"
+                },
+               new CoverImage
+                {
+                    Name="happy",
+                    ImageFile="/Assets/Images/dandiya.png"
+                },
+                   new CoverImage
+                {
+                    Name="meditation",
+                    ImageFile="/Assets/Images/kishore.png"
+                },
+               new CoverImage
+               {
+                   Name = "romantic",
+                   ImageFile = "/Assets/Images/lata.png"
+                },
+               new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/party.png"
+                },
+              new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/tranquil.png"
+                },
+              new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/workout.png"
+                },
+              new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/romantic.png"
+                },
+              new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/international.png"
+                },
+              new CoverImage
+               {
+                   Name = "melody",
+                   ImageFile = "/Assets/Images/happy.png"
                 }
-            }
-            else
-            {
-                File.Create(playListFileName);
-            }
 
-            playListLines.ForEach(each => playList.Add(each));
+            };
 
-            */
+            Images.ForEach(each => ImageList.Add(each));
 
-
-            //SongLines.ForEach(each => songList.Add(each));
-
-        }
-        public static void GetDisplayList(List <EachSongLine> songList, List<EachPlayList> playList)
-        {
-
-        }
-        public static void GetDisplayListByHeader(List<EachSongLine> songList, List<EachPlayList> playList, MenuHeader header)
-        {
-            if (header == MenuHeader.AllSongs)
-            {
-                //display songList
-
-            }
-            else if (header == MenuHeader.Playlists)
-            {
-                //display playlists names
-
-            }
         }
     }
 }

@@ -14,14 +14,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <RelativePanel Grid.Row="0">
+        <!--<RelativePanel Grid.Row="0">
             <Button Name="HamburgerButton" 
                     RelativePanel.AlignLeftWithPanel="True"
                     Content="&#xE700;"
                     FontFamily="Segoe MDL2 Assets"
                     Click="HamburgerButton_Click"   
                     />
-        </RelativePanel>
+        </RelativePanel>-->
 
         <SplitView Grid.Row="1"
                    Name="leftSplitView"
@@ -70,41 +70,40 @@
                 <StackPanel>
                     <MediaElement Name ="MyMediaElement" AutoPlay="True" />
                     <ListView Name="AllSongsListView" 
-                          IsItemClickEnabled="True"
+                          IsItemClickEnabled="False"
                           ItemClick="AllSongsListView_ItemClick"
                           ItemsSource="{x:Bind SongList}"
                           >
 
                         <ListView.ItemTemplate>
                         <DataTemplate x:DataType="model:EachSongLine">
-                            <RelativePanel Name="relativepanel1">
+                            <RelativePanel>
                                 <TextBlock Name="SongTrack"
                                    Text="{x:Bind SongTitle}"
                                    Width="800"
                                    FontSize="20" 
                                    RelativePanel.AlignLeftWithPanel="True"
                                 />
-                               
-                                <Button Name ="AllSongsListViewPlayButton"
+                                    <Button Name ="EachSongPlayButton"
                                     RelativePanel.RightOf="SongTrack"
                                     Content="&#xE102;"
                                     FontFamily="Segoe MDL2 Assets"
-                                    Click="AllSongsListViewPlayButton_Click"
+                                    Click="EachSongPlayButton_Click"
                                     Height="50"
                                     Width="50"
-                                    BorderBrush="Black"
+                                    CommandParameter="{x:Bind AudioFile}"
                                  />
-                                <Button Name ="AddButton"
-                                    RelativePanel.RightOf="AllSongsListViewPlayButton"
-                                    Content="&#xE109;"
+                                    <Button Name ="EachSongStopButton"
+                                    RelativePanel.RightOf="EachSongPlayButton"
+                                    Content="&#xE71A;"
                                     FontFamily="Segoe MDL2 Assets"
-                                    Click="AddButton_Click"
+                                    Click="EachSongStopButton_Click"
                                     Height="50"
                                     Width="50"
-                                    BorderBrush="Black"    
+                                    CommandParameter="{x:Bind AudioFile}"        
                                 />
 
-                            </RelativePanel>
+                                </RelativePanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -179,7 +178,16 @@
                                       Height="50"
                                       Grid.Row="2"
                                       Grid.Column="1"
-                             />
+                                      ItemsSource="{x:Bind listOfImages}"
+                             >
+                                <ComboBox.ItemTemplate>
+                                                                       
+                                        <DataTemplate x:DataType="model:CoverImage">
+                                            <Image Height="40" Source="{Binding Mode=TwoWay, Path=ImageFile}" />
+                                        </DataTemplate>
+                                    
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <Button Name ="CreateButton"
                                     Content="Create"
                                     FontSize="20"
@@ -191,12 +199,12 @@
                         </Grid>
                         
                     </ListView>
+                    <MediaElement Name ="MyMediaElement3" AutoPlay="True" />
                     <ListView Name="AddSongsView" 
                           IsItemClickEnabled="False"
                           ItemsSource="{x:Bind SelectedSongs}"
                           >
-                        <MediaElement Name ="MyMediaElement3" AutoPlay="True" />
-
+                        
                         <ListView.ItemTemplate>
 
                             <DataTemplate x:DataType="model:EachSongLine">
@@ -225,32 +233,51 @@
                             <Button Name ="AddSongsViewAddButton"
                                             Content="Add Songs"
                                             Click="AddSongsViewAddButton_Click"
+                                            Height="50"
+                                            FontSize="20"
                                             HorizontalAlignment="Center"
                                     />
                         </ListView.Footer>
                     </ListView>
 
                     <ListView Name="ThisPlayListView" 
-                          IsItemClickEnabled="False"
+                          IsItemClickEnabled="True"
                           ItemClick="ThisPlayListView_ItemClick"
                           ItemsSource="{x:Bind thisPlayList}"
                           >
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="model:EachPlayList">
-                                <TextBlock Name="SongTitleTextBox"
-                                        Text="{x:Bind Name}"
-                                        Width="800"
-                                        FontSize="30"
+                                <StackPanel>
+                                    <Image Name="PlayListImage" 
+                                           Source="{x:Bind ImageFile}"
+                                           Height="200"
+                                           Width="200"
+                                           HorizontalAlignment="Center"
+                                       />
+                                    <TextBlock Name="PlayListNameTextBlock"
+                                                Text="{x:Bind Name}"
+                                                Width="800"
+                                                FontSize="20"
+                                                TextAlignment="Center"
                                         />
-
+                                <TextBlock Name="SongDescriptionTextBlock"
+                                        Text="{x:Bind Description}"
+                                        Width="800"
+                                        FontSize="20"
+                                        TextAlignment="Center"
+                                        />
+                                </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
+               
                     </ListView>
-
+                    <MediaElement Name ="PlaylistMediaElement" AutoPlay="True"/>
                     <ListView Name="SongsInThisPlayListView"
-                                 ItemsSource="{x:Bind currentPlaylist.Songs}"
+                              IsItemClickEnabled="False"
+                              ItemsSource="{x:Bind currentPlaylist.Songs}"
                                  >
-                            <ListView.ItemTemplate>
+                        
+                        <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="model:EachSongLine">
                                     <StackPanel>
                                         <TextBlock Name="SongTitleTextBox"
@@ -261,23 +288,36 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                        
+
 
                         <ListView.Footer>
                             <RelativePanel>
-                                <Button Name="PlayPlayListButton"
-                                    Click="PlayPlayListButton_Click"
-                                    Content="Play All"
-                                    Width="80"
-                                    Height="40"
-                                    />
-                                <Button Name="AddSongsToPlayListButton"
-                                    RelativePanel.RightOf="PlayPlayListButton"
-                                    Click="AddSongsToPlayListButton_Click"
-                                    Content="Add Songs"
-                                    Width="80"
-                                    Height="40"
-                                    />
+                                <Button Name ="PlayButton"
+                                    RelativePanel.AlignLeftWithPanel="True"
+                                    Content="&#xE102;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="PlayButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                 />
+                                <Button Name ="StopButton"
+                                    RelativePanel.RightOf="PlayButton"
+                                    Content="&#xE71A;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="StopButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                />
+                                <Button Name ="PauseButton"
+                                    RelativePanel.RightOf="StopButton"
+                                    Content="&#xE769;"
+                                    FontFamily="Segoe MDL2 Assets"
+                                    Click="PauseButton_Click"
+                                    Height="50"
+                                    Width="50"
+                                />
+
+
                             </RelativePanel>
                         </ListView.Footer>
                     </ListView>
